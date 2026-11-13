@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">RetroGames</string>
+    <string name="title_activity_main">RetroGames</string>
+    <string name="package_name">com.retrogames.catalogo</string>
+    <string name="custom_url_scheme">com.retrogames.catalogo</string>
+</resources>
