@@ -1,34 +1,42 @@
 name: Build Android APK
 
+
 on:
   push:
     branches:
       - main
       - master
 
+
 jobs:
   build:
     name: Build APK
     runs-on: ubuntu-latest
 
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
 
+
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
+
 
       - name: Instalar dependências
         run: npm ci
 
+
       - name: Build do projeto React
         run: npm run build
 
+
       - name: Gerar assets nativos Android
         run: npx capacitor-assets generate --android
+
 
       - name: Configurar Java 17
         uses: actions/setup-java@v4
@@ -36,14 +44,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+
       - name: Sincronizar com Android
         run: npx cap sync android
+
 
       - name: Dar permissão ao Gradle
         run: chmod +x android/gradlew
 
+
       - name: Build APK debug
         run: cd android && ./gradlew assembleDebug
+
 
       - name: Upload da APK como artefato
         uses: actions/upload-artifact@v4
